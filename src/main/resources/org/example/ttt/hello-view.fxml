@@ -19,7 +19,7 @@
              <Button fx:id="button9" layoutX="85.0" layoutY="160.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" />
          </children>
       </FlowPane>
-      <Button layoutX="284.0" layoutY="331.0" mnemonicParsing="false" onAction="#restartGame" text="Restarta" />
+      <Button layoutX="284.0" layoutY="331.0" mnemonicParsing="false" onAction="#restartGame" text="Restart" />
       <Text fx:id="winnerText" layoutX="301.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TTT" />
    </children>
 </AnchorPane>
