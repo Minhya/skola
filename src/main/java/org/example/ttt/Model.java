@@ -11,10 +11,10 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
     private String currentPlayer; //lagrar nuvarande spelar, om det är X eller O
     private int xScore; // poäng för X spelare
     private int oScore; // poäng för O.
-    private final PropertyChangeSupport support; //Hanterar förändringar för att uppdatera UI
+    private final PropertyChangeSupport support; //Hanterar förändringar för att uppdatera UI, ändrar därmed i hellocontroller.
     private final BotenAnna botenAnna; //Bot instansen, spelar O rollen.
     private final Random random; //slumpmässigt, för att välja drag
-    private Boolean gameOver = false;
+    private Boolean gameOver = false; //gameOver objekt
 
     public Model() {
         //Konstruktor för initialisering av spel board^ och poäng. Första spelaren blir X.
@@ -22,7 +22,7 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
         currentPlayer = "X";  // Väljer X som första spelare.
         xScore = 0;
         oScore = 0;
-        support = new PropertyChangeSupport(this); // initialisering
+        support = new PropertyChangeSupport(this); // initialisering. support är en instans som hjälper till att hantera lyssnaren
         botenAnna = new BotenAnna(); // Instansering av bot
         random = new Random(); // instansiering av slumpmässiga drag.
     }
@@ -31,9 +31,9 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
         return board;
     }
 
-    public String getCurrentPlayer() { //getter för nuvarande spelare.
-        return currentPlayer;
-    }
+//    public String getCurrentPlayer() { //getter för nuvarande spelare.
+//        return currentPlayer;
+//    }
 
     public int getXScore() { //getter för poäng för X
         return xScore;
@@ -47,18 +47,21 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
         return gameOver;
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) { //Lyssnare objekt för att uppdatera UI kompnenter när något ändrats. Data ändrats.
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    /*Lyssnare objekt för att uppdatera UI kompnenter när något ändrats.
+    Data ändrats.events som click
+    */
         support.addPropertyChangeListener(listener);
     }
 
-    public boolean move(int position, String playerMark) {
+    public boolean move(int position, String playerMark) {//spelarens drag
         if (board[position] == null) {
             board[position] = playerMark;//placerar "bricka"
-            return true;
+            return true; //returnerar att det är placerad
         } else return false;
     }
 
-    public boolean makeMove(int position) { //metod för att placera nuvarande spelarens markering/bricka på brädan
+    public boolean makeMove(int position) { //metod för att boten ska göra sitt drag
         if (move(position, currentPlayer)) {  //kollar om någon ruta är tom
             support.firePropertyChange("board", null, board);//säger till UI om förändring av brädan (helloController)
             if (!checkIfGameIsOver()) {//kollar om spelet är över
@@ -115,10 +118,10 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
 
         // kollar om det är oavgjort
         boolean isDraw = true;
-        for (String cell : board) {
+        for (String cell : board) {//kollar rutorna i board
             if (cell == null) {//om rutan är tom är det inte oavgjort ännu
                 isDraw = false;
-                break;
+                break;//går ut ur loopen för att alla rutor inte är fyllda ännu
             }
         }
         if (isDraw) {// om det är oavgjort, gör detta:

@@ -64,7 +64,7 @@ public class HelloController implements Initializable, PropertyChangeListener { 
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) { //uppdaterar UI baserat på ändringar
+    public void propertyChange(PropertyChangeEvent evt) { //uppdaterar UI baserat på ändringar, evt för event
         switch (evt.getPropertyName()) {
             case "board" -> updateBoard((String[]) evt.getNewValue());
             case "winner" -> winnerText.setText((String) evt.getNewValue());
