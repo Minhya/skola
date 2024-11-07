@@ -13,8 +13,8 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {//laddar FXML filen och sätter upp the stage
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, 600, 400);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(root, 600, 400);//anger hur stor fönstret ska vara
+        stage.setTitle("Tic Tac Toe!");
         stage.setScene(scene);
         stage.show();
     }

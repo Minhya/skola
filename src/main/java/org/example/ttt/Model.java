@@ -14,6 +14,7 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
     private final PropertyChangeSupport support; //Hanterar förändringar för att uppdatera UI
     private final BotenAnna botenAnna; //Bot instansen, spelar O rollen.
     private final Random random; //slumpmässigt, för att välja drag
+    private Boolean gameOver = false;
 
     public Model() {
         //Konstruktor för initialisering av spel board^ och poäng. Första spelaren blir X.
@@ -42,13 +43,23 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
         return oScore;
     }
 
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
     public void addPropertyChangeListener(PropertyChangeListener listener) { //Lyssnare objekt för att uppdatera UI kompnenter när något ändrats. Data ändrats.
         support.addPropertyChangeListener(listener);
     }
 
+    public boolean move(int position, String playerMark) {
+        if (board[position] == null) {
+            board[position] = playerMark;//placerar "bricka"
+            return true;
+        } else return false;
+    }
+
     public boolean makeMove(int position) { //metod för att placera nuvarande spelarens markering/bricka på brädan
-        if (board[position] == null) { //kollar om någon ruta är tom
-            board[position] = currentPlayer;//placerar "bricka"
+        if (move(position, currentPlayer)) {  //kollar om någon ruta är tom
             support.firePropertyChange("board", null, board);//säger till UI om förändring av brädan (helloController)
             if (!checkIfGameIsOver()) {//kollar om spelet är över
                 togglePlayer();//nästa spelares tur, byter spelare
@@ -91,11 +102,13 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
                 xScore++;//lägger till poäng för X
                 support.firePropertyChange("winner", null, "X won!");//uppdaterar UI och skriver ut att X har vunnit
                 support.firePropertyChange("score", null, new int[]{xScore, oScore});//uppdaterar poäng i UI
+                gameOver = true;
                 return true;
             } else if ("OOO".equals(line)) {//när O vinner.
                 oScore++; //poäng till O
                 support.firePropertyChange("winner", null, "O won!");// text om vinst
                 support.firePropertyChange("score", null, new int[]{xScore, oScore}); //uppdaterar poäng i UI
+                gameOver = true;
                 return true;
             }
         }
@@ -117,6 +130,7 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
     }
 
     public void resetGame() {//startar om spelet.
+        gameOver = false;
         board = new String[9];//nya tomma rutor
         currentPlayer = "X"; //sätter första spelaren till X
         support.firePropertyChange("board", null, board);//säger till UI att brädan har resettats.

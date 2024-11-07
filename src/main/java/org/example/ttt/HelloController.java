@@ -43,7 +43,7 @@ public class HelloController implements Initializable, PropertyChangeListener { 
 
     private void handleButtonClick(int index) {
         if (model.makeMove(index)) {//gör drag om det är tillgängligt genom model
-            if (model.checkIfGameIsOver()) {//kollar om spelet är över genom model
+            if (model.isGameOver()) {//kollar om spelet är över genom model
                 disableAllButtons();//om spelet är över så ska alla knappar resettas och bli tillgängligt igen
             }
         }
