@@ -26,7 +26,7 @@ public class HelloController implements Initializable, PropertyChangeListener { 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {//initialiserar model
         model = new Model();
-        model.addPropertyChangeListener(this);//initialiserar lyssnaren, övervakar events och "reagerar"
+        model.addPropertyChangeListener(this);//initialiserar lyssnaren, övervakar events och "reagerar". ändringar i spel logiken (model) kommer att notifiera hellocontroller om nuvarande spelare och vinnare
 
         buttons = new ArrayList<>(Arrays.asList(button1, button2, button3, button4, button5, button6, button7, button8, button9));
         setupButtons(); //sätter actions till knapparna

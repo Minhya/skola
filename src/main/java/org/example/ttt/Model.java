@@ -42,14 +42,14 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
         return oScore;
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) { //Lyssnare för att uppdatera UI kompnenter när något ändrats. Data ändrats.
+    public void addPropertyChangeListener(PropertyChangeListener listener) { //Lyssnare objekt för att uppdatera UI kompnenter när något ändrats. Data ändrats.
         support.addPropertyChangeListener(listener);
     }
 
-    public boolean makeMove(int index) { //metod för att placera nuvarande spelarens markering/bricka på brädan
-        if (board[index] == null) { //kollar om någon ruta är tom
-            board[index] = currentPlayer;//placerar "bricka"
-            support.firePropertyChange("board", null, board);//säger till UI om förändring av brädan
+    public boolean makeMove(int position) { //metod för att placera nuvarande spelarens markering/bricka på brädan
+        if (board[position] == null) { //kollar om någon ruta är tom
+            board[position] = currentPlayer;//placerar "bricka"
+            support.firePropertyChange("board", null, board);//säger till UI om förändring av brädan (helloController)
             if (!checkIfGameIsOver()) {//kollar om spelet är över
                 togglePlayer();//nästa spelares tur, byter spelare
                 if ("O".equals(currentPlayer)) { //om det är Os tur så gör boten ett drag
