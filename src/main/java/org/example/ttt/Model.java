@@ -31,10 +31,6 @@ public class Model { //spel logik och data för TTT. har hand om brädan, spelar
         return board;
     }
 
-//    public String getCurrentPlayer() { //getter för nuvarande spelare.
-//        return currentPlayer;
-//    }
-
     public int getXScore() { //getter för poäng för X
         return xScore;
     }

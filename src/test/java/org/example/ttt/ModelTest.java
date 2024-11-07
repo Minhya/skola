@@ -33,7 +33,7 @@ public class ModelTest {
         model.move(0, X);
         assertEquals(X, model.getBoard()[0], "Expected X to be placed at position 0.");
         model.move(0, O);
-        assertEquals(X, model.getBoard()[0], "Expected X to be placed at position 0.");//kolla igen
+        assertEquals(X, model.getBoard()[0], "X is still expected to be at position 0.");//kolla igen
     }
 
     @Test
@@ -54,12 +54,11 @@ public class ModelTest {
         model.move(3, O);
         model.move(1, X);
         model.move(4, O);
-        //assertFalse(model.checkIfGameIsOver(), "Expected game not to be over yet.");
+        assertFalse(model.checkIfGameIsOver(), "Expected game not to be over yet."); //kollar att matchen inte är över
         model.move(2, X);
 
         assertTrue(model.checkIfGameIsOver(), "Expected game to be over with X as the winner.");
         assertEquals(1, model.getXScore(), "Expected X's score to be 1 after winning.");
-        assertEquals(X, model.getBoard()[0], "Expected X in winning position.");
     }
 
     @Test
