@@ -19,16 +19,16 @@ public class ModelTest {
     }
 
     @Test
-    @DisplayName("Testing valid moves.")
-    void testMakeValidMove() {
+    @DisplayName("Valid moves.")
+    void makeValidMoveTest() {
         // Gör ett drag på pos 0 och kolla om det är giltigt
         model.move(0, X); //lägg X på pos 0 vilket är första rutan
         assertEquals(X, model.getBoard()[0], "Expected X to be placed at position 0.");
     }
 
     @Test
-    @DisplayName("Testing for denying moves")
-    void testDisallowLegalMove() {
+    @DisplayName("Denying moves")
+    void disallowLegalMoveTest() {
         // Gör ett drag på pos 0 med X och kolla om det är giltigt. Gör liknande drag som tidigare test men försöker lägga O på pos 0 också.
         model.move(0, X);
         assertEquals(X, model.getBoard()[0], "Expected X to be placed at position 0.");
@@ -37,8 +37,8 @@ public class ModelTest {
     }
 
     @Test
-    @DisplayName("Testing invalid moves")
-    void testMakeInvalidMove() {
+    @DisplayName("Invalid moves")
+    void makeInvalidMoveTest() {
         // Gör ett drag på pos 0 med O och sen försöka lägga X på pos 0 också.
         model.move(0, O);
         assertFalse(model.makeMove(0), "Expected move to be invalid when cell is already taken.");
@@ -47,8 +47,8 @@ public class ModelTest {
 
 
     @Test
-    @DisplayName("Testing winning conditions for X")
-    void testWinConditionForX() {
+    @DisplayName("X's winning conditions")
+    void winConditionForXTest() {
         // Gör drag så att X vinner genom vinst kombinationer, börjar med X och sedan är det Os tur
         model.move(0, X);
         model.move(3, O);
@@ -62,8 +62,8 @@ public class ModelTest {
     }
 
     @Test
-    @DisplayName("Testing winning conditions for O")
-    void testWinConditionForO() {
+    @DisplayName("O's winning conditions")
+    void winConditionForOTest() {
         // Gör drag så att O vinner
         model.move(0, X);
         model.move(3, O);
@@ -77,8 +77,8 @@ public class ModelTest {
     }
 
     @Test
-    @DisplayName("Testing draw condition")
-    void testDrawCondition() {
+    @DisplayName("Draw conditions")
+    void drawConditionTest() {
         // Gör drag för ett oavgjort spel
         model.move(0, X);
         model.move(1, O);
